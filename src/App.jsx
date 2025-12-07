@@ -4,6 +4,7 @@ import './App.css'
 function App() {
   const [lang, setLang] = useState('TR')
   const isTR = lang === 'TR'
+  const [menuOpen, setMenuOpen] = useState(false)
 
   // Sadece scroll-animate elemanları için görünürlük animasyonu
   useEffect(() => {
@@ -36,13 +37,24 @@ function App() {
       <header>
         <div className="logo">TRADEPARK</div>
 
+        {/* HAMBURGER MENU BUTTON - YENİ */}
+        <button 
+          className={`hamburger ${menuOpen ? 'active' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
         {/* NAVBAR BUTONLARI + DROPDOWN */}
-        <nav className="main-nav">
-          <button className="nav-btn">
+        <nav className={`main-nav ${menuOpen ? 'active' : ''}`}>
+          <button className="nav-btn" onClick={() => setMenuOpen(false)}>
             {isTR ? 'Ana Sayfa' : 'Main Page'}
           </button>
 
-          <button className="nav-btn">
+          <button className="nav-btn" onClick={() => setMenuOpen(false)}>
             {isTR ? 'Hakkımızda' : 'About Us'}
           </button>
 
@@ -52,22 +64,22 @@ function App() {
               {isTR ? 'Hizmetlerimiz' : 'Services'}
             </button>
             <div className="dropdown-menu">
-              <button type="button" className="dropdown-item">
+              <button type="button" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                 {isTR ? 'Biz Kimiz' : 'Who We Are'}
               </button>
-              <button type="button" className="dropdown-item">
+              <button type="button" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                 {isTR ? 'Faaliyet Alanımız' : 'Our Field of Activity'}
               </button>
-              <button type="button" className="dropdown-item">
+              <button type="button" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                 {isTR ? 'Şirket Profili' : 'Company Profile'}
               </button>
-              <button type="button" className="dropdown-item">
+              <button type="button" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                 {isTR ? 'Ekibimiz' : 'Our Team'}
               </button>
             </div>
           </div>
 
-          <button className="nav-btn">
+          <button className="nav-btn" onClick={() => setMenuOpen(false)}>
             {isTR ? 'İletişim' : 'Contact'}
           </button>
         </nav>
@@ -130,6 +142,7 @@ function App() {
         </h2>
 
         <div className="corporate-grid">
+          {/* Biz Kimiz Kartı (Değişmedi) */}
           <div className="corporate-card scroll-animate">
             <h3>{isTR ? 'Biz Kimiz?' : 'Who We Are'}</h3>
             <p>
@@ -139,74 +152,14 @@ function App() {
             </p>
             <p>
               {isTR
-                ? 'TRADEPARK her ne kadar 2015 yılında kurulmuş bir şirket olsa da, bünyemizde görev alan patent ve marka vekillerimiz 19 yılı aşan bilgi birikimine sahiptir. Kadromuz, Türk Patent ve Marka Kurumu’nun kurucu koordinatörü olan, Türk Patent Kanunlarının hazırlanması ve uygulamaya konulması ile mevzuat uyum sürecinde ülkemizi temsil eden Zekeriya BAŞTÜRK tarafından yetiştirilmiştir.'
+                ? 'TRADEPARK her ne kadar 2015 yılında kurulmuş bir şirket olsa da, bünyemizde görev alan patent ve marka vekillerimiz 19 yılı aşan bilgi birikimine sahiptir. Kadromuz, Türk Patent ve Marka Kurumu’nun kurucu koordinatörü olan, Türk Patent Kanunlarının hazırlanması ve uygulanması ile mevzuat uyum sürecinde ülkemizi temsil eden Zekeriya BAŞTÜRK tarafından yetiştirilmiştir.'
                 : 'Although TRADEPARK was established in 2015, our patent and trademark attorneys have more than 19 years of experience. They were trained by Mr. Zekeriya BAŞTÜRK, the Founding Coordinator of the Turkish Patent and Trademark Office, who represented Türkiye abroad, drafted and implemented the Turkish Patent Laws and led the harmonization of legislation.'}
             </p>
-            <p>
-              {isTR
-                ? 'Patent, faydalı model, marka ve tasarım haklarının elde edilmesi kadar, bu hakların devir, lisans ve know-how sözleşmeleri ile ticarileştirilmesi ve taklit ile tecavüzlere karşı etkin şekilde korunması da bizim için önemlidir.'
-                : 'For us, it is as important to commercialise patent, utility model, trademark and design rights through transfer, licence and know-how agreements as it is to obtain them, and to protect these rights effectively against infringement, counterfeiting and misuse.'}
-            </p>
+       
             <button type="button" className="read-more">
               {isTR ? 'Detaylı oku →' : 'Read more →'}
             </button>
-          </div>
-
-          <div className="corporate-card scroll-animate">
-            <h3>{isTR ? 'Şirket Profili' : 'Company Profile'}</h3>
-            <p>
-              <strong>{isTR ? 'Şirket Adı:' : 'Company Name:'}</strong>{' '}
-              {isTR
-                ? 'TRADEPARK Uluslararası Danışmanlık Ltd. Şti.'
-                : 'TRADEPARK International Consultancy Ltd. Co.'}
-              <br />
-              <strong>{isTR ? 'Şirket Türü:' : 'Company Type:'}</strong>{' '}
-              {isTR ? 'Limited Şirket' : 'Limited Company'}
-              <br />
-              <strong>{isTR ? 'Faaliyet Şekli:' : 'Activity Type:'}</strong>{' '}
-              {isTR ? 'Hizmet' : 'Service'}
-              <br />
-              <strong>{isTR ? 'Faaliyet Alanı:' : 'Field of Activity:'}</strong>{' '}
-              {isTR
-                ? 'Sınai Mülkiyet Vekilliği ve Hukuki Danışmanlık'
-                : 'Industrial Property Attorney and Legal Consultancy'}
-              <br />
-              <strong>{isTR ? 'Yetkili Kurum:' : 'Affiliated Authority:'}</strong>{' '}
-              {isTR
-                ? 'Türk Patent ve Marka Kurumu'
-                : 'Turkish Patent and Trademark Office'}
-              <br />
-              <strong>{isTR ? 'Oda Kaydı:' : 'Trade Registration:'}</strong>{' '}
-              {isTR
-                ? 'Ankara Ticaret Odası – No: 383799'
-                : 'Ankara Chamber of Commerce – No: 383799'}
-              <br />
-              <strong>{isTR ? 'Vergi Dairesi:' : 'Tax Office:'}</strong>{' '}
-              {isTR ? 'Cumhuriyet' : 'Cumhuriyet'}
-              <br />
-              <strong>{isTR ? 'Vergi No:' : 'Tax Registration No:'}</strong>{' '}
-              8590615742
-              <br />
-              <strong>{isTR ? 'Marka:' : 'Trademark:'}</strong> TRADEPARK
-              (TÜRKPATENT Reg. No: 2015/52151)
-            </p>
-            <p>
-              <strong>{isTR ? 'Uzman Kadro:' : 'Professional Staff:'}</strong>{' '}
-              {isTR
-                ? 'Marka Vekili, Patent Vekili, Avukat, Yeminli Tercüman'
-                : 'Trademark Attorney, Patent Attorney, Lawyer, Certified Translator'}
-              <br />
-              <strong>{isTR ? 'Adres:' : 'Address:'}</strong>{' '}
-              Açın Caddesi 18/10, GOP, Çankaya, Ankara, TÜRKİYE
-              <br />
-              <strong>Tel:</strong> (+90 312) 437 33 37 / 437 33 38
-              <br />
-              <strong>Fax:</strong> (+90 312) 437 33 38
-              <br />
-              <strong>E-mail:</strong>{' '}
-              <a href="mailto:info@tradepark.com.tr">info@tradepark.com.tr</a>
-            </p>
-          </div>
+          </div> 
         </div>
       </section>
 
@@ -433,9 +386,10 @@ function App() {
         </div>
 
         <div className="center-btn">
-          <button className="btn btn-secondary btn-on-light" type="button">
-            {isTR ? 'Ekibimizin Tamamını Görüntüleyin' : 'View Full Team'}
-          </button>
+      <button className="btn btn-primary btn-on-light" type="button">
+  {isTR ? 'Ekibimizin Tamamını Görüntüleyin' : 'View Full Team'}
+</button>
+
         </div>
       </section>
 
@@ -468,9 +422,10 @@ function App() {
         </div>
 
         <div className="center-btn">
-          <button className="btn btn-secondary btn-on-light" type="button">
-            {isTR ? 'Tüm Referansları Görüntüleyin' : 'View All References'}
-          </button>
+        <button className="btn btn-primary btn-on-light" type="button">
+  {isTR ? 'Tüm Referansları Görüntüleyin' : 'View All References'}
+</button>
+
         </div>
       </section>
 
@@ -488,11 +443,34 @@ function App() {
       </section>
 
       <footer>
-        <p>
-          &copy; {new Date().getFullYear()} TRADEPARK Uluslararası Danışmanlık
-          Ltd. Şti. {isTR ? 'Tüm hakları saklıdır.' : 'All rights reserved.'}
-        </p>
-      </footer>
+  <div className="footer-grid">
+    <div className="footer-item">
+      <strong>Adres</strong>
+      <p>Açın Caddesi 18/10 GOP Çankaya / Ankara / TÜRKİYE</p>
+    </div>
+
+    <div className="footer-item">
+      <strong>Telefon</strong>
+      <p>(+90 312) 437 33 37<br/>(+90 312) 437 33 38</p>
+    </div>
+
+    <div className="footer-item">
+      <strong>Fax</strong>
+      <p>(+90 312) 437 33 38</p>
+    </div>
+
+    <div className="footer-item">
+      <strong>E-posta</strong>
+      <p><a href="mailto:info@tradepark.com.tr">info@tradepark.com.tr</a></p>
+    </div>
+  </div>
+
+  <p className="footer-copy">
+    &copy; {new Date().getFullYear()} TRADEPARK Uluslararası Danışmanlık Ltd. Şti.  
+    {isTR ? ' Tüm hakları saklıdır.' : ' All rights reserved.'}
+  </p>
+</footer>
+
     </>
   )
 }
